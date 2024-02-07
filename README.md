@@ -8,7 +8,6 @@
 1. Reproducibly perform queries.
 2. Determine which queries are most accurate.
 3. Define review questions.
-4. Reduce the level of subject apriori bias.
 
 ## Some examples of information
 * 6 of 300 abstracts contain all of: genomics & metabolomics & proteomics & transcriptomics.
