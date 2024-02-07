@@ -9,6 +9,7 @@ library(widyr)
 library(tidytext)
 library(igraph)
 library(ggraph)
+library(reshape2)
 
 # query ----
 # Define groups of search terms. Each group's terms will be combined using "OR".
@@ -105,7 +106,6 @@ title1 <-
   "Most common words in \nabstracts related to terms of interest (quantile 0.95)"
 
 plot1 <- word_counts %>%
-  # mutate(TermOfInterest = ifelse(word %in% terms, "Yes", "No")) %>%
   filter(n > quantile(n, 0.95)) %>%  # Optional: Only show the most common words
   ggplot(aes(reorder(word, n), n, fill = TermOfInterest)) +
   geom_col() +
@@ -234,7 +234,10 @@ plot3 <- ggraph(g, layout = layout) +
   theme_void()
 # labs(title = title3, size=0.6)
 
+
 # Save it  as a PDF
+# Skip as slow and not always informative
+#
 # ggsave(
 #   filename = "../data/figures/network_plot.pdf",
 #   plot = plot3,
@@ -244,8 +247,7 @@ plot3 <- ggraph(g, layout = layout) +
 # )
 
 # Plot heatmap ----
-library(ggplot2)
-library(reshape2)
+
 
 # First, we need to reshape the data to a long format
 # # Filter to include only word pairs that co-occur more than a certain number of times
@@ -425,6 +427,7 @@ ggsave(filename = "../data/figures/omics_combination_counts.pdf",
 
 
 # patchwork ----
+# Use for making complex multi-plots
 library(patchwork)
 # patch0 <- (plot1 | plot2) / (plot3 | plot4) + plot_annotation(tag_levels = 'A')
 patch0 <-
